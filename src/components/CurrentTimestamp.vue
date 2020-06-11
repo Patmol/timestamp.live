@@ -1,12 +1,11 @@
 <template>
-  <div>
-    <h2 class="is-size-1">Current Timestamp</h2>
-    <p id="timestamp" class="timestamp is-size-3">
-      {{ parseInt(now / 1000) }}</p>
+  <div class="relative">
+    <p :id="timestampId" class="timestamp is-size-3">{{ parseInt(now / parseInt(unit)) }}</p>
     <button
-      class="button is-info is-light"
+      ref="clipboardButton"
+      class="button is-primary"
       title="copy"
-      data-clipboard-target="#timestamp"
+      :data-clipboard-target="'#' + timestampId"
     >
       <i class="far fa-clipboard"></i>
     </button>
@@ -25,11 +24,15 @@ export default {
     return {
       now: Date.now(),
       isCopied: false,
+      timestampId: `uid${this.unit}`,
     };
   },
-  created() {
+  props: {
+    unit: String,
+  },
+  mounted() {
     // eslint-disable-next-line no-new
-    const clipboard = new ClipboardJS('.button');
+    const clipboard = new ClipboardJS(this.$refs.clipboardButton);
 
     clipboard.on('success', (e) => {
       this.isCopied = true;
@@ -49,20 +52,26 @@ export default {
 </script>
 
 <style scoped>
+.relative {
+  position: relative;
+}
+
 .timestamp {
   display: inline-block;
-  width: 190px;
+  font-family: Lato;
 }
 
 .button {
+  left: 10px;
   position: relative;
-  top: 6px;
+  top: 3px;
 }
 
 .notification-copy {
   display: inline-block;
   margin-left: 15px;
   padding: 8px 30px !important;
-  top: -4px;
+  position: absolute;
+  top: 3px;
 }
 </style>
