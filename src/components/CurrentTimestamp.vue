@@ -1,10 +1,9 @@
 <template>
-  <div>
-    <p :id="timestampId" class="timestamp is-size-3">
-      {{ parseInt(now / parseInt(unit)) }}</p>
+  <div class="relative">
+    <p :id="timestampId" class="timestamp is-size-3">{{ parseInt(now / parseInt(unit)) }}</p>
     <button
       ref="clipboardButton"
-      class="button is-info is-light"
+      class="button is-primary"
       title="copy"
       :data-clipboard-target="'#' + timestampId"
     >
@@ -53,21 +52,26 @@ export default {
 </script>
 
 <style scoped>
+.relative {
+  position: relative;
+}
+
 .timestamp {
   display: inline-block;
   font-family: Lato;
 }
 
 .button {
-  position: relative;
-  top: 4px;
   left: 10px;
+  position: relative;
+  top: 3px;
 }
 
 .notification-copy {
   display: inline-block;
   margin-left: 15px;
   padding: 8px 30px !important;
-  top: -4px;
+  position: absolute;
+  top: 3px;
 }
 </style>

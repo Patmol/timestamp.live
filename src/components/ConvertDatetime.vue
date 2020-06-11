@@ -5,7 +5,7 @@
         <input
           class="input"
           type="text"
-          v-model="timestampToConvert"
+          v-model="datetimeToConvert"
           :placeholder="placeholder" />
       </p>
       <p class="control">
@@ -13,37 +13,39 @@
       </p>
     </div>
     <div>
-        {{ timestampConvert }}
+        {{ datetimeConvert }}
     </div>
   </div>
 </template>
 
 <script>
+import moment from 'moment';
+
 export default {
-  name: 'ConvertTimestamp',
+  name: 'ConvertDatetime',
   data() {
     return {
-      timestampToConvert: '',
-      timestampConvert: '',
+      datetimeToConvert: '',
+      datetimeConvert: '',
     };
   },
   computed: {
     placeholder() {
-      return `Enter a timestamp : ${Date.now()}`;
+      return 'Enter a date : 20 dec 2019';
     },
   },
   methods: {
     convert() {
       try {
-        let timestamp = this.timestampToConvert;
+        const date = moment(this.datetimeToConvert);
 
-        if (timestamp.length === 10) {
-          timestamp *= 1000;
+        if (date.isValid()) {
+          this.datetimeConvert = date.valueOf();
+        } else {
+          this.datetimeConvert = 'This value cannot be convert';
         }
-
-        this.timestampConvert = new Date(parseInt(timestamp, 10));
       } catch (e) {
-        this.timestampConvert = 'This value cannot be convert';
+        this.datetimeConvert = 'This value cannot be convert';
       }
     },
   },
