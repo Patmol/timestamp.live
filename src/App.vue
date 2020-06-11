@@ -1,8 +1,10 @@
 <template>
   <div id="app">
-    <Navbar></Navbar>
+    <Header></Header>
     <div class="container">
-      <CurrentTimestamp></CurrentTimestamp>
+      <h2 class="is-size-1">Current Timestamp</h2>
+      <CurrentTimestamp unit="1000"></CurrentTimestamp>
+      <CurrentTimestamp unit="1"></CurrentTimestamp>
     </div>
     <div class="container">
       <ConvertTimestamp></ConvertTimestamp>
@@ -13,14 +15,14 @@
 <script>
 import ConvertTimestamp from './components/ConvertTimestamp.vue';
 import CurrentTimestamp from './components/CurrentTimestamp.vue';
-import Navbar from './components/common/Navbar.vue';
+import Header from './components/common/Header.vue';
 
 export default {
   name: 'App',
   components: {
     ConvertTimestamp,
     CurrentTimestamp,
-    Navbar,
+    Header,
   },
 };
 </script>

@@ -13,6 +13,8 @@
     "bulma": "^0.9.0",
     "clipboard": "^2.0.6",
     "core-js": "^3.6.5",
+    "lato-font": "^3.0.0",
+    "moment": "^2.26.0",
     "vue": "^2.6.11"
   },
   "devDependencies": {
